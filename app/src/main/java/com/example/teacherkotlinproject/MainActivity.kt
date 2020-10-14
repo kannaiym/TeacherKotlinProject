@@ -17,6 +17,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 //        text_view.text = getName(60)
 //        Log.v("CREATED_NAME", getName(60))
+        Log.v("CREATED_NAME", "Test")
         changeTextAction()
     }
 
