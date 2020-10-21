@@ -75,30 +75,81 @@
         android:textColor="@color/colorText"
         android:textSize="16sp"/>
 
-    <TextView
-        android:id="@+id/phone_text_view"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Номер телефона:"
+        android:orientation="vertical"
         app:layout_constraintTop_toBottomOf="@+id/age_text_view"
         app:layout_constraintStart_toStartOf="parent"
-        android:padding="8dp"
-        android:layout_marginTop="32dp"
-        android:textColor="@color/colorText"
-        android:textSize="16sp"/>
+        android:layout_marginTop="32dp">
 
-    <EditText
-        android:id="@+id/phone_edit_text"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:hint="Введите номер телефона"
-        android:textSize="16sp"
-        app:layout_constraintTop_toTopOf="@+id/phone_text_view"
-        app:layout_constraintBottom_toBottomOf="@+id/phone_text_view"
-        app:layout_constraintStart_toEndOf="@+id/phone_text_view"
-        app:layout_constraintEnd_toEndOf="parent"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Номер телефона:"
+                android:padding="8dp"
+                android:textColor="@color/colorText"
+                android:textSize="16sp"/>
+
+            <EditText
+                android:id="@+id/phone_edit_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Введите номер телефона"
+                android:textSize="16sp"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Город:"
+                android:padding="8dp"
+                android:textColor="@color/colorText"
+                android:textSize="16sp"/>
+
+            <EditText
+                android:id="@+id/city_edit_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Введите город"
+                android:textSize="16sp"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Область:"
+                android:padding="8dp"
+                android:textColor="@color/colorText"
+                android:textSize="16sp"/>
+
+            <EditText
+                android:id="@+id/region_edit_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Введите область"
+                android:textSize="16sp"/>
+        </LinearLayout>
+
+    </LinearLayout>
 
     <Button
+        android:id="@+id/save_button"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"
