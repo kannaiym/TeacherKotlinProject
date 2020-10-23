@@ -7,33 +7,12 @@
     android:orientation="vertical"
     android:gravity="center">
 
-    <EditText
-        android:id="@+id/enter_text_edit_text"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Введите текст"/>
-
     <Button
-        android:id="@+id/add_button"
+        android:id="@+id/go_to_next"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="добавить"/>
+        android:text="Перейти на 2-й активити"/>
 
-    <EditText
-        android:id="@+id/enter_text_delete_edit_text"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Введите текст, который нужно удалить"/>
 
-    <Button
-        android:id="@+id/remove_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="удалить"/>
-
-    <TextView
-        android:id="@+id/all_elements_text_view"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"/>
 
 </LinearLayout>

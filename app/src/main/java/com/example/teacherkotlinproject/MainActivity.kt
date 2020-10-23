@@ -1,66 +1,29 @@
 package com.example.teacherkotlinproject
 
+import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import kotlinx.android.synthetic.main.constrate_layout.*
+import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
 
-    var count = 0
-    var age = 0
-    var weight = 0
-    var size = 0
+    //При нажатии на кнопку передавать значение из EditText во 2-й активити и выводить Toast
+    //Каждый раз когда вы нажимаете на кнопку перейти на 2-й активити, то добавлять ваше значение в Array
+    //Добавить вторую кнопку в mainActivity, при нажатии на которую вы будете выводить все значения в Toast
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.constrate_layout)
-        Log.v("ACTIVITY_STATE", "onCreate")
+        setContentView(R.layout.activity_main)
+        nextActivityAction()
     }
 
-    override fun onStart() {
-        super.onStart()
-        Log.v("ACTIVITY_STATE", "onStart")
-    }
-
-    override fun onRestoreInstanceState(savedInstanceState: Bundle) {
-        super.onRestoreInstanceState(savedInstanceState)
-        count = savedInstanceState.getInt("count")
-        age = savedInstanceState.getInt("age")
-        weight = savedInstanceState.getInt("weight")
-        size = savedInstanceState.getInt("size")
-    }
-
-    override fun onResume() {
-        super.onResume()
-        Log.v("ACTIVITY_STATE", "onResume")
-        count++
-        Log.v("ACTIVITY_STATE_COUNT", "$count")
-    }
-
-    override fun onPause() {
-        super.onPause()
-        Log.v("ACTIVITY_STATE", "onPause")
-
-    }
-
-    override fun onSaveInstanceState(outState: Bundle) {
-        super.onSaveInstanceState(outState)
-        Log.v("ACTIVITY_STATE", "onSaveInstanceState")
-        outState.putInt("count", count)
-        outState.putInt("age", age)
-        outState.putInt("weight", weight)
-        outState.putInt("size", size)
-    }
-
-    override fun onStop() {
-        super.onStop()
-        Log.v("ACTIVITY_STATE", "onStop")
-    }
-
-    override fun onDestroy() {
-        super.onDestroy()
-        Log.v("ACTIVITY_STATE", "onDestroy")
+    private fun nextActivityAction() {
+        go_to_next.setOnClickListener {
+            val intent = Intent(this, SecondActivity::class.java)
+            intent.putExtra("first_value", "Hello")
+            startActivity(intent)
+        }
     }
 
     private fun showToast(message: String) {
