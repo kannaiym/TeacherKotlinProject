@@ -7,17 +7,17 @@
     android:orientation="vertical"
     tools:context=".MainActivity">
 
-    <TextView
-        android:id="@+id/text"
+    <EditText
+        android:id="@+id/output"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="SECOND ACTIVITY"
+        android:hint="текст"
         android:gravity="center"/>
 
     <Button
-        android:id="@+id/go_to_next"
+        android:id="@+id/go_to_main"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Перейти на 3-й активити" />
+        android:text="Вернуть изменения" />
 
 </LinearLayout>

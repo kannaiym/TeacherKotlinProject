@@ -11,13 +11,11 @@ class MainActivity : AppCompatActivity() {
     //При нажатии на кнопку передавать значение из EditText во 2-й активити и выводить Toast
     //Каждый раз когда вы нажимаете на кнопку перейти на 2-й активити, то добавлять ваше значение в Array
     //Добавить вторую кнопку в mainActivity, при нажатии на которую вы будете выводить все значения в Toast
-    private val array = mutableListOf<String>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         nextActivityAction()
-        displayArrayValuesAction()
     }
 
     private fun nextActivityAction() {
@@ -25,23 +23,18 @@ class MainActivity : AppCompatActivity() {
             val intent = Intent(this, SecondActivity::class.java)
             val valueFromEditText = input.text.toString()
             intent.putExtra("value", valueFromEditText)
-            array.add(valueFromEditText)
-            startActivity(intent)
+            startActivityForResult(intent, 1)
         }
     }
 
-    private fun displayArrayValuesAction() {
-        display_all_values.setOnClickListener {
-            var message = ""
-            array.forEach {
-                message = "$message $it \n"
-            }
-            showToast(message)
-        }
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (data == null) return
+        val modifyData = data.getStringExtra("modify_value")
+        input.setText(modifyData)
     }
 
     private fun showToast(message: String) {
         Toast.makeText(this, message, Toast.LENGTH_LONG).show()
     }
-
 }

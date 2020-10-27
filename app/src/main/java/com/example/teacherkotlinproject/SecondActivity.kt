@@ -1,5 +1,6 @@
 package com.example.teacherkotlinproject
 
+import android.app.Activity
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -13,19 +14,21 @@ class SecondActivity : AppCompatActivity() {
         setContentView(R.layout.activity_second)
 
         getIntentFromPreviousActivity()
-        goToNextAction()
+        goToMainAction()
     }
 
     private fun getIntentFromPreviousActivity() {
         val valueFromFirstActivity = intent.getStringExtra("value")
-        showToast(valueFromFirstActivity)
+        output.setText(valueFromFirstActivity)
     }
 
-    // go_to_next
-    private fun goToNextAction() {
-        go_to_next.setOnClickListener {
-            val intent = Intent(this, ThirdActivity::class.java)
-            startActivity(intent)
+    private fun goToMainAction() {
+        go_to_main.setOnClickListener {
+            val intent = Intent()
+            val output = output.text.toString()
+            intent.putExtra("modify_value", output)
+            setResult(Activity.RESULT_OK, intent)
+            finish()
         }
     }
 
