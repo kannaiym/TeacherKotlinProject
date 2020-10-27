@@ -7,12 +7,22 @@
     android:orientation="vertical"
     android:gravity="center">
 
+    <EditText
+        android:id="@+id/input"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Введите значение"/>
+
     <Button
         android:id="@+id/go_to_next"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Перейти на 2-й активити"/>
 
-
+    <Button
+        android:id="@+id/display_all_values"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="отобразить массив"/>
 
 </LinearLayout>

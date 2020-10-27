@@ -17,7 +17,7 @@ class SecondActivity : AppCompatActivity() {
     }
 
     private fun getIntentFromPreviousActivity() {
-        val valueFromFirstActivity = intent.getStringExtra("first_value")
+        val valueFromFirstActivity = intent.getStringExtra("value")
         showToast(valueFromFirstActivity)
     }
 
