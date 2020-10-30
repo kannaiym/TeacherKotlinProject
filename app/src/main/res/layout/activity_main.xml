@@ -30,6 +30,7 @@
             android:padding="4dp">
 
             <ImageButton
+                android:id="@+id/btn_remove"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
@@ -233,6 +234,7 @@
                 android:textSize="24sp" />
 
             <Button
+                android:id="@+id/btn_dot"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
