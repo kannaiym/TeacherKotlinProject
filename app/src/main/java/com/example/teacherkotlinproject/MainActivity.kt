@@ -1,25 +1,37 @@
 package com.example.teacherkotlinproject
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.widget.Button
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import kotlinx.android.synthetic.main.activity_main.*
+import java.util.ArrayList
 import kotlin.math.roundToInt
 
 class MainActivity : AppCompatActivity() {
+
+    //Типы кнопок
+    // 1. просит от вас подтверждения - зеленый или приоритетный цвет приложение
+    // 2. неактивный - серым неактивные, нужно сначала выполнить опредленное действие
+    // 3. выключенные кнопки
+    // 4. Второстепенные кнопки
 
     private var enteredNumber: Double = 0.0
     private var operand = ""
     private var default = ""
     private var lastNumber = ""
+
+    private val equalsArray = mutableListOf<String>()
+
     private val decimalArrayButtons = mutableListOf<Button>()
     private val operandArrayButtons = mutableListOf<Button>()
 
-    //Создать новый массив для кнопок операндов.
-    //В целых числах убрать дробное значение. (90 + 90 = 180)
-    //Сократить длину результата при вычитании дробных чисел (4.529999999999999 -> 4.52) - ДОПОЛНИТЕЛЬНОЕ ЗАДАНИЕ
+    //onRestart, onResume, onDestroy //onSaveInstanceState //onRestoreInstanceState
+    //* Нужно обработать переворот вашего устройства и при этом сохранить значения: operand, enteredNumber, default, lastNumber
+    //* Исправить отображение элементов в ListOfEqualsActivity
+    //* В ListOfEqualsActivity отправлять только целые или дробные числа с 2 символоми после .
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -33,6 +45,15 @@ class MainActivity : AppCompatActivity() {
         btnAC()
         btnEquals()
         btnRemoveLast()
+        btnOpenList()
+    }
+
+    private fun btnOpenList() {
+        send_equal_btn.setOnClickListener {
+            val intent = Intent(this, ListOfEqualsActivity::class.java)
+            intent.putStringArrayListExtra("list", equalsArray as ArrayList<String>)
+            startActivity(intent)
+        }
     }
 
     private fun setDecimalButtonsToArray() {
@@ -99,6 +120,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun displayResult() {
+        equalsArray.add(enteredNumber.toString())
         if (enteredNumber % 1 == 0.0) result.text = enteredNumber.roundToInt().toString()
         else result.text = String.format("%.2f", enteredNumber)
         lastNumber = ""
