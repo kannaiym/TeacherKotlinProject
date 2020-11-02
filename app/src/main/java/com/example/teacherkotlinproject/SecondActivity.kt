@@ -29,6 +29,7 @@ class SecondActivity : AppCompatActivity() {
             intent.putExtra("modify_value", output)
             setResult(Activity.RESULT_OK, intent)
             finish()
+
         }
     }
 

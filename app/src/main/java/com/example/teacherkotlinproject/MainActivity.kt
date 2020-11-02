@@ -1,10 +1,12 @@
 package com.example.teacherkotlinproject
 
 import android.os.Bundle
+import android.util.Log
 import android.widget.Button
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import kotlinx.android.synthetic.main.activity_main.*
+import kotlin.math.roundToInt
 
 class MainActivity : AppCompatActivity() {
 
@@ -13,6 +15,7 @@ class MainActivity : AppCompatActivity() {
     private var default = ""
     private var lastNumber = ""
     private val decimalArrayButtons = mutableListOf<Button>()
+    private val operandArrayButtons = mutableListOf<Button>()
 
     //Создать новый массив для кнопок операндов.
     //В целых числах убрать дробное значение. (90 + 90 = 180)
@@ -22,12 +25,10 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         setDecimalButtonsToArray()
-        setAllButton()
+        setOperandButtonsToArray()
 
-        btnSplit()
-        btnPow()
-        btnPlus()
-        btnMinus()
+        setDecimalButton()
+        setOperandButton()
 
         btnAC()
         btnEquals()
@@ -50,7 +51,7 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    private fun setAllButton() {
+    private fun setDecimalButton() {
         for (btn in decimalArrayButtons) {
             btn.setOnClickListener {
                 default = result.text.toString()
@@ -58,6 +59,21 @@ class MainActivity : AppCompatActivity() {
                 lastNumber += btn.text
                 result.text = default
             }
+        }
+    }
+
+    private fun setOperandButtonsToArray() {
+        operandArrayButtons.apply {
+            add(btn_pow)
+            add(btn_split)
+            add(btn_minus)
+            add(btn_plus)
+        }
+    }
+
+    private fun setOperandButton() {
+        for (btn in operandArrayButtons) {
+            btn.setOnClickListener { operandWorker(btn.text.toString()) }
         }
     }
 
@@ -70,46 +86,27 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-//    val f: Double = 0.0 ~ 4 m
-//    val d: Float = 0.0F ~ 1.8 billion
-
     private fun btnEquals() {
-        if (lastNumber.isNotEmpty())
+//        if (lastNumber.isNotEmpty())
         btn_equals.setOnClickListener {
             if (operand == "*") enteredNumber *= lastNumber.toDouble()
             else if (operand == "/") enteredNumber /= lastNumber.toDouble()
             else if (operand == "+") enteredNumber += lastNumber.toDouble()
             else if (operand == "-") enteredNumber -= lastNumber.toDouble()
-            result.text = enteredNumber.toString()
-            lastNumber = ""
+
+            displayResult()
         }
     }
 
-    private fun btnSplit() {
-        btn_split.setOnClickListener {
-            operandWorker("/")
-        }
+    private fun displayResult() {
+        if (enteredNumber % 1 == 0.0) result.text = enteredNumber.roundToInt().toString()
+        else result.text = String.format("%.2f", enteredNumber)
+        lastNumber = ""
     }
 
-    private fun btnPow() {
-        btn_pow.setOnClickListener {
-            operandWorker("*")
-        }
-    }
-
-    private fun btnPlus() {
-        btn_plus.setOnClickListener {
-            operandWorker("+")
-        }
-    }
-
-    private fun btnMinus() {
-        btn_minus.setOnClickListener {
-            operandWorker("-")
-        }
-    }
-
-    private fun operandWorker(type: String ) {
+    private fun operandWorker(type: String) {
+        var text = result.text.toString()
+        if (text.isNullOrEmpty()) { return }
         default = result.text.toString()
         if (isDecimal(default.last())) {
             //если последний символ цифра
