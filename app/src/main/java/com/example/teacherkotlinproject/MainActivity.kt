@@ -7,9 +7,6 @@ import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
 
-    // Сделать вычитание чисел.
-    // Сделать сложение чисел.
-    // Сделать удаление последнего символа.
 
     private var enteredNumber = 0
     private var operand = ""
