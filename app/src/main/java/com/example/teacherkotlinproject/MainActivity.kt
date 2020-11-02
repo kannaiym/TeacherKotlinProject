@@ -31,7 +31,7 @@ class MainActivity : AppCompatActivity() {
     //onRestart, onResume, onDestroy //onSaveInstanceState //onRestoreInstanceState
     //* Нужно обработать переворот вашего устройства и при этом сохранить значения: operand, enteredNumber, default, lastNumber
     //* Исправить отображение элементов в ListOfEqualsActivity
-    //* В ListOfEqualsActivity отправлять только целые или дробные числа с 2 символоми после .
+    //* В ListOfEqualsActivity отправлять только целые или дробные числа с 2 символоми после.
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -108,7 +108,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun btnEquals() {
-//        if (lastNumber.isNotEmpty())
+        if (lastNumber.isNotEmpty())
         btn_equals.setOnClickListener {
             if (operand == "*") enteredNumber *= lastNumber.toDouble()
             else if (operand == "/") enteredNumber /= lastNumber.toDouble()
