@@ -155,6 +155,8 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+
+
     private fun btnPow() {
         btn_pow.setOnClickListener {
             default = result.text.toString()
