@@ -176,6 +176,7 @@
             android:background="@color/black_bgr"
             android:text="Перейти"
             android:layout_margin="8dp"/>
+
     </LinearLayout>
 
 

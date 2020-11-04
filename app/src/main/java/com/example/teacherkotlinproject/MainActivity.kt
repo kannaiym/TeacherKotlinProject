@@ -2,6 +2,7 @@ package com.example.teacherkotlinproject
 
 import android.content.Intent
 import android.os.Bundle
+import android.os.PersistableBundle
 import android.util.Log
 import android.widget.Button
 import android.widget.Toast
@@ -12,26 +13,15 @@ import kotlin.math.roundToInt
 
 class MainActivity : AppCompatActivity() {
 
-    //Типы кнопок
-    // 1. просит от вас подтверждения - зеленый или приоритетный цвет приложение
-    // 2. неактивный - серым неактивные, нужно сначала выполнить опредленное действие
-    // 3. выключенные кнопки
-    // 4. Второстепенные кнопки
-
     private var enteredNumber: Double = 0.0
     private var operand = ""
     private var default = ""
     private var lastNumber = ""
 
-    private val equalsArray = mutableListOf<String>()
+    private var equalsArray = mutableListOf<String>()
 
     private val decimalArrayButtons = mutableListOf<Button>()
     private val operandArrayButtons = mutableListOf<Button>()
-
-    //onRestart, onResume, onDestroy //onSaveInstanceState //onRestoreInstanceState
-    //* Нужно обработать переворот вашего устройства и при этом сохранить значения: operand, enteredNumber, default, lastNumber
-    //* Исправить отображение элементов в ListOfEqualsActivity
-    //* В ListOfEqualsActivity отправлять только целые или дробные числа с 2 символоми после.
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -54,6 +44,28 @@ class MainActivity : AppCompatActivity() {
             intent.putStringArrayListExtra("list", equalsArray as ArrayList<String>)
             startActivity(intent)
         }
+    }
+
+    //после андроида 5.0 или выше api 21
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+        outState.putDouble("enteredNumber", enteredNumber)
+        outState.putString("operand", operand)
+        outState.putString("default", default)
+        outState.putString("lastNumber", lastNumber)
+        outState.putString("textViewData", result.text.toString())
+        outState.putStringArrayList("equalsArray", equalsArray as ArrayList)
+    }
+
+    //Воставливать все значения
+    override fun onRestoreInstanceState(savedInstanceState: Bundle) {
+        super.onRestoreInstanceState(savedInstanceState)
+        enteredNumber = savedInstanceState.getDouble("enteredNumber")
+        operand = savedInstanceState.getString("operand").toString()
+        default = savedInstanceState.getString("default").toString()
+        lastNumber = savedInstanceState.getString("lastNumber").toString()
+        result.text = savedInstanceState.getString("textViewData")
+//        equalsArray = savedInstanceState.getStringArrayList("equalsArray") as MutableList<String>
     }
 
     private fun setDecimalButtonsToArray() {
@@ -100,7 +112,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun btnRemoveLast() {
         btn_remove.setOnClickListener {
-        if (default.isNotEmpty()) {
+            if (default.isNotEmpty()) {
                 default = default.dropLast(1)
                 result.text = default
             }
@@ -120,19 +132,22 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun displayResult() {
-        equalsArray.add(enteredNumber.toString())
-        if (enteredNumber % 1 == 0.0) result.text = enteredNumber.roundToInt().toString()
-        else result.text = String.format("%.2f", enteredNumber)
+        val summary = if (enteredNumber % 1 == 0.0) enteredNumber.roundToInt().toString()
+        else String.format("%.2f", enteredNumber)
+        equalsArray.add(summary)
+        result.text = summary
         lastNumber = ""
     }
 
     private fun operandWorker(type: String) {
         var text = result.text.toString()
-        if (text.isNullOrEmpty()) { return }
+        if (text.isNullOrEmpty()) {
+            return
+        }
         default = result.text.toString()
         if (isDecimal(default.last())) {
             //если последний символ цифра
-            if (enteredNumber == 0.0)  enteredNumber += lastNumber.toDouble()
+            if (enteredNumber == 0.0) enteredNumber += lastNumber.toDouble()
             lastNumber = ""
         } else {
             default = default.dropLast(1)

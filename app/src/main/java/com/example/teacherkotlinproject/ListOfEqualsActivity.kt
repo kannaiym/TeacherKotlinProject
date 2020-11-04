@@ -1,7 +1,5 @@
 package com.example.teacherkotlinproject
 
-import android.app.Activity
-import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
@@ -21,11 +19,10 @@ class ListOfEqualsActivity : AppCompatActivity() {
         var result: String = ""
         if (value != null)
         for (i in value) {
-            result += "$value \n"
+            result += "$i \n"
         }
         list_txt.text = result
     }
-
 
     private fun showToast(message: String?) {
         Toast.makeText(this, message, Toast.LENGTH_LONG).show()
