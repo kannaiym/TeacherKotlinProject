@@ -6,178 +6,32 @@
     android:orientation="vertical"
     tools:context=".MainActivity">
 
+    <EditText
+        android:id="@+id/input_edit_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Введите ваши значения"
+        android:layout_marginTop="32dp"/>
+
+    <Button
+        android:id="@+id/set_shared_btn"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Добавить в ShardPreference"
+        android:layout_marginTop="32dp"/>
+
     <TextView
-        android:id="@+id/result"
+        android:id="@+id/from_shared_text_view"
+        android:text="Значения из SHAREDPREFENCES"
         android:layout_width="match_parent"
-        android:layout_height="220dp"
-        android:background="@color/black_bgr"
-        android:textColor="@color/gray"
-        android:textSize="56sp"
-        tools:text="10000"
-        android:gravity="bottom|right"
-        android:layout_weight="1"/>
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"/>
 
-    <LinearLayout
+    <Button
+        android:id="@+id/get_shared_btn"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@color/black_bgr"
-        android:orientation="vertical"
-        android:layout_weight="1">
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:orientation="horizontal"
-            android:padding="4dp">
-
-            <ImageButton
-                android:id="@+id/btn_remove"
-                android:src="@drawable/ic_remove_last"
-                style="@style/button"/>
-
-            <Button
-                android:text=")"
-                style="@style/button" />
-
-            <Button
-                android:text="%"
-                style="@style/button"/>
-
-            <Button
-                android:id="@+id/btn_clear"
-                android:text="AC"
-                style="@style/button" />
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:orientation="horizontal"
-            android:padding="4dp">
-
-            <Button
-                android:id="@+id/btn_7"
-                android:text="7"
-                style="@style/button"/>
-
-            <Button
-                android:id="@+id/btn_8"
-                android:text="8"
-                style="@style/button"/>
-
-            <Button
-                android:id="@+id/btn_9"
-                android:text="9"
-                style="@style/button" />
-
-            <Button
-                android:id="@+id/btn_split"
-                android:text="/"
-                style="@style/button"/>
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:orientation="horizontal"
-            android:padding="4dp">
-
-            <Button
-                android:id="@+id/btn_4"
-                android:text="4"
-                style="@style/button"/>
-
-            <Button
-                android:id="@+id/btn_5"
-                android:text="5"
-                style="@style/button" />
-
-            <Button
-                android:id="@+id/btn_6"
-                android:text="6"
-                style="@style/button"/>
-
-            <Button
-                android:id="@+id/btn_pow"
-                android:text="*"
-                style="@style/button"/>
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:orientation="horizontal"
-            android:padding="4dp">
-
-            <Button
-                android:id="@+id/btn_1"
-                android:text="1"
-                style="@style/button"/>
-
-            <Button
-                android:id="@+id/btn_2"
-                android:text="2"
-                style="@style/button"/>
-
-            <Button
-                android:id="@+id/btn_3"
-                android:text="3"
-                style="@style/button"/>
-
-            <Button
-                android:id="@+id/btn_minus"
-                android:text="-"
-                style="@style/button"/>
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:orientation="horizontal"
-            android:padding="4dp">
-
-            <Button
-                android:id="@+id/btn_0"
-                android:text="0"
-                style="@style/button"/>
-
-            <Button
-                android:id="@+id/btn_dot"
-                android:text="."
-                style="@style/button"/>
-
-            <Button
-                android:id="@+id/btn_equals"
-                android:text="="
-                style="@style/button"
-                android:background="@drawable/btn_circle"/>
-
-            <Button
-                android:id="@+id/btn_plus"
-                android:text="+"
-                style="@style/button"/>
-
-        </LinearLayout>
-
-        <Button
-            android:id="@+id/send_equal_btn"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:textColor="@color/white"
-            android:background="@color/black_bgr"
-            android:text="Перейти"
-            android:layout_margin="8dp"/>
-
-    </LinearLayout>
-
+        android:layout_height="wrap_content"
+        android:text="Получить из ShardPreference"
+        android:layout_marginTop="32dp"/>
 
 </LinearLayout>
