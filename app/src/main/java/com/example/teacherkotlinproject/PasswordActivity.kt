@@ -5,23 +5,15 @@ import android.os.Bundle
 import android.widget.Toast
 import kotlinx.android.synthetic.main.activity_second.*
 
-class ListOfEqualsActivity : AppCompatActivity() {
+class PasswordActivity : AppCompatActivity() {
+
+    private lateinit var shared: SharedPreferences
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_second)
-
-        getListOfEquals()
-    }
-
-    private fun getListOfEquals() {
-        val value = intent.getStringArrayListExtra("list")
-        var result: String = ""
-        if (value != null)
-        for (i in value) {
-            result += "$i \n"
-        }
-        list_txt.text = result
+        shared = SharedPreferences(this)
+        value_text_view.text = shared.login
     }
 
     private fun showToast(message: String?) {

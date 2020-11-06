@@ -4,29 +4,30 @@ import android.content.Context
 import android.content.SharedPreferences
 import androidx.core.content.edit
 
-const val TEXT_PREF = "text_from_edit_text"
-const val IS_HAS_PERSONAL_DATA_PREF = "is_has_personal_data"
+const val LOGIN = "login"
+const val PASSWORD = "password"
+
 class SharedPreferences(context: Context) {
 
-    private val sharedPreferences: SharedPreferences = context.getSharedPreferences("kotlin-app", Context.MODE_PRIVATE)
+    private val sharedPreferences: SharedPreferences = context.getSharedPreferences("authorization_application", Context.MODE_PRIVATE)
 
-    var myPersonalData: String
+    var login: String
     get() {
-        return sharedPreferences.getStringOrDefault(TEXT_PREF)
+        return sharedPreferences.getStringOrDefault(LOGIN)
     }
     set(value) {
         sharedPreferences.edit {
-            putString(TEXT_PREF, value)
+            putString(LOGIN, value)
         }
     }
 
-    var isHasPersonalData: Boolean
+    var password: String
         get() {
-            return sharedPreferences.getBoolean(IS_HAS_PERSONAL_DATA_PREF, false)
+            return sharedPreferences.getStringOrDefault(PASSWORD)
         }
         set(value) {
             sharedPreferences.edit {
-                putBoolean(IS_HAS_PERSONAL_DATA_PREF, value)
+                putString(PASSWORD, value)
             }
         }
 
