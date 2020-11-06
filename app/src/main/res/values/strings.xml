@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">TeacherKotlinProject</string>
+    <string name="field_cannot_be_empty">Поле не должно быть пустым!</string>
+    <string name="login_is_not_find">Ваш логин не найден.</string>
+    <string name="enter_login">Введите логин</string>
+    <string name="regisration">Регистриция</string>
+    <string name="login">Авторизация</string>
 </resources>

@@ -2,51 +2,59 @@ package com.example.teacherkotlinproject
 
 import android.content.Intent
 import android.os.Bundle
-import android.os.PersistableBundle
-import android.util.Log
-import android.widget.Button
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import kotlinx.android.synthetic.main.activity_main.*
-import java.util.ArrayList
-import kotlin.math.roundToInt
+import kotlinx.android.synthetic.main.activity_login.*
+
+//0. !!!ПОДГОТОВИТЬ ВОПРОСЫ ПО ТЕМАМ, КОТОРЫЕ НЕ ПОНЯТНЫ!!!
+//1. (RegistrationActivity) Сделать проверку на схожесть паролей, если они разные вывести ошибку
+//2. (RegistrationActivity) Вынести проверку значений в EditText в отдельный метод
+//3. (RegistrationActivity) Сделать проверку на количество символов в логин и пароль (>= 6)
+/*4. (RegistrationActivity,
+      LoginActivity,
+      PasswordActivity) Вынести их проверки полей в отдельный файл */
+//5.  Вынести переход на новую актвити в отдельный файл
+//6. (ДОПОЛНИТЕЛЬНО) Вынести все размеры dp, sp в файл dimens
+//7. (ДОПОЛНИТЕЛЬНО) Вынести все строки в ресурсы
 
 class LoginActivity : AppCompatActivity() {
 
     private lateinit var shared: SharedPreferences
 
-    //LoginActivity -
-    //PasswordActivity
-
-    //+ 1. Переименовать MainActivity в LoginActivity, добавить Button логин и editText - логин
-    /*2. При нажатии на кнопку Login - Сделать проверку если логин не пустой -> сохранение значения Логина в SharedPreferences
-    и переходите в PasswordActivity и закрываете LoginActivity
-    иначе вывести TOAST с ошибкой*/
-    //3. Добавить PasswordActivity и TextView, а в TextView отображать данные из SharedPreferences
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
+        setContentView(R.layout.activity_login)
         shared = SharedPreferences(this)
 
+        registrationAction()
         loginAction()
+    }
+
+    private fun registrationAction() {
+        registration_button.setOnClickListener {
+            val intent = Intent(this, RegistrationActivity::class.java)
+            startActivity(intent)
+        }
     }
 
     private fun loginAction() {
         login_btn.setOnClickListener {
             val login = input_login.text.toString()
             if (login.isNotEmpty()) {
-                shared.login = login
+                checkLoginField(login)
                 val intent = Intent(this, PasswordActivity::class.java)
                 startActivity(intent)
                 finish()
             } else {
-                showToast("Поле не должно быть пустым!")
+                showToast(this, resources.getString(R.string.field_cannot_be_empty))
             }
         }
     }
 
-    private fun showToast(message: String?) {
-        Toast.makeText(this, message, Toast.LENGTH_LONG).show()
+    private fun checkLoginField(login: String) {
+        if (login != shared.login) {
+            showToast(this, resources.getString(R.string.login_is_not_find))
+            input_login.setText("")
+            return
+        }
     }
 }

@@ -1,9 +1,9 @@
 package com.example.teacherkotlinproject
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.Toast
-import kotlinx.android.synthetic.main.activity_second.*
+import kotlinx.android.synthetic.main.activity_password.*
 
 class PasswordActivity : AppCompatActivity() {
 
@@ -11,12 +11,19 @@ class PasswordActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_second)
+        setContentView(R.layout.activity_password)
         shared = SharedPreferences(this)
-        value_text_view.text = shared.login
+        confirmAction()
     }
 
-    private fun showToast(message: String?) {
-        Toast.makeText(this, message, Toast.LENGTH_LONG).show()
+    private fun confirmAction() {
+        check_password_button.setOnClickListener {
+            val password = password_edit_text.text.toString()
+            if (password.isEmpty() && password != shared.password) return@setOnClickListener
+
+            val intent = Intent(this, MainActivity::class.java)
+            startActivity(intent)
+        }
     }
+
 }
