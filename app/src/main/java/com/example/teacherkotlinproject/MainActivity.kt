@@ -1,6 +1,7 @@
 package com.example.teacherkotlinproject
 
 import android.os.Bundle
+import android.widget.Button
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import kotlinx.android.synthetic.main.activity_main.*
@@ -8,24 +9,21 @@ import kotlinx.android.synthetic.main.activity_main.*
 class MainActivity : AppCompatActivity() {
 
 
-    private var enteredNumber = 0
+
+
+    private var enteredNumber: Double = 0.0
+
     private var operand = ""
     private var default = ""
     private var lastNumber = ""
+    private val decimalArrayButtons = mutableListOf<Button>()
+    private val operandArrayButton = ""
 
-    override fun onCreate(savedInstanceState: Bundle?) {
+        override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        btn0()
-        btn1()
-        btn2()
-        btn3()
-        btn4()
-        btn5()
-        btn6()
-        btn7()
-        btn8()
-        btn9()
+        setDecimalButtonsToArray()
+        setAllButton()
 
         btnSplit()
         btnPow()
@@ -34,121 +32,63 @@ class MainActivity : AppCompatActivity() {
 
         btnAC()
         btnEquals()
+        btnRemoveLast()
     }
 
-    private fun btn0() {
-        btn_0.setOnClickListener {
-            default = result.text.toString()
-            default += "0"
-            lastNumber += "0"
-            result.text = default
+    private fun setDecimalButtonsToArray() {
+        decimalArrayButtons.apply {
+            add(btn_0)
+            add(btn_1)
+            add(btn_2)
+            add(btn_3)
+            add(btn_4)
+            add(btn_5)
+            add(btn_6)
+            add(btn_7)
+            add(btn_8)
+            add(btn_9)
+            add(btn_dot)
         }
     }
 
-    private fun btn1() {
-        btn_1.setOnClickListener {
-            default = result.text.toString()
-            default += "1"
-            lastNumber += "1"
-            result.text = default
+    private fun setAllButton() {
+        for (btn in decimalArrayButtons) {
+            btn.setOnClickListener {
+                default = result.text.toString()
+                default += btn.text
+                lastNumber += btn.text
+                result.text = default
+            }
+        }
+    }
+    
+
+
+    private fun btnRemoveLast() {
+        btn_remove.setOnClickListener {
+        if (default.isNotEmpty()) {
+                default = default.dropLast(1)
+                result.text = default
+            }
         }
     }
 
-    private fun btn2() {
-        btn_2.setOnClickListener {
-            default = result.text.toString()
-            default += "2"
-            lastNumber += "2"
-            result.text = default
-        }
-    }
-
-    private fun btn3() {
-        btn_3.setOnClickListener {
-            default = result.text.toString()
-            default += "3"
-            lastNumber += "3"
-            result.text = default
-        }
-    }
-
-    private fun btn4() {
-        btn_4.setOnClickListener {
-            default = result.text.toString()
-            default += "4"
-            lastNumber += "4"
-            result.text = default
-        }
-    }
-
-    private fun btn5() {
-        btn_5.setOnClickListener {
-            default = result.text.toString()
-            default += "5"
-            lastNumber += "5"
-            result.text = default
-        }
-    }
-
-    private fun btn6() {
-        btn_6.setOnClickListener {
-            default = result.text.toString()
-            default += "6"
-            lastNumber += "6"
-            result.text = default
-        }
-    }
-
-    private fun btn7() {
-        btn_7.setOnClickListener {
-            default = result.text.toString()
-            default += "7"
-            lastNumber += "7"
-            result.text = default
-        }
-    }
-
-    private fun btn8() {
-        btn_8.setOnClickListener {
-            default = result.text.toString()
-            default += "8"
-            lastNumber += "8"
-            result.text = default
-        }
-    }
-
-    private fun btn9() {
-        btn_9.setOnClickListener {
-            default = result.text.toString()
-            default += "9"
-            lastNumber += "9"
-            result.text = default
-        }
-    }
 
     private fun btnEquals() {
+        if (lastNumber.isNotEmpty())
         btn_equals.setOnClickListener {
-            if (operand == "*") {
-                val sum = enteredNumber * lastNumber.toInt()
-                result.text = sum.toString()
-            } else if (operand == "/") {
-                val sum = enteredNumber / lastNumber.toInt()
-                result.text = sum.toString()
-            } else if (operand == "+") {
-                val sum = enteredNumber + lastNumber.toInt()
-                result.text = sum.toString()
-            } else if (operand == "-") {
-                val sum = enteredNumber - lastNumber.toInt()
-                result.text = sum.toString()
-            }
+            if (operand == "*") enteredNumber *= lastNumber.toDouble()
+            else if (operand == "/") enteredNumber /= lastNumber.toDouble()
+            else if (operand == "+") enteredNumber += lastNumber.toDouble()
+            else if (operand == "-") enteredNumber -= lastNumber.toDouble()
+            result.text = enteredNumber.toString()
+            lastNumber = ""
         }
     }
 
     private fun btnSplit() {
         btn_split.setOnClickListener {
-            default = result.text.toString()
-            default += "/"
-            result.text = default
+            operandWorker("/")
         }
     }
 
@@ -156,42 +96,39 @@ class MainActivity : AppCompatActivity() {
 
     private fun btnPow() {
         btn_pow.setOnClickListener {
-            default = result.text.toString()
-            if (isDecimal(default.last())) {
-
-                if (enteredNumber == 0) enteredNumber += lastNumber.toInt()
-                else enteredNumber *= lastNumber.toInt()
-                lastNumber = ""
-                default += "*"
-                result.text = default
-            } else {
-                default = default.dropLast(1)
-                default += "*"
-                result.text = default
-            }
-            operand = "*"
+            operandWorker("*")
         }
     }
 
     private fun btnPlus() {
         btn_plus.setOnClickListener {
-            default = result.text.toString()
-            default += "+"
-            result.text = default
+            operandWorker("+")
         }
     }
 
     private fun btnMinus() {
         btn_minus.setOnClickListener {
-            default = result.text.toString()
-            default += "-"
-            result.text = default
+            operandWorker("-")
         }
+    }
+
+    private fun operandWorker(type: String ) {
+        default = result.text.toString()
+        if (isDecimal(default.last())) {
+            //если последний символ цифра
+            if (enteredNumber == 0.0)  enteredNumber += lastNumber.toDouble()
+            lastNumber = ""
+        } else {
+            default = default.dropLast(1)
+        }
+        default += type
+        result.text = default
+        operand = type
     }
 
     private fun btnAC() {
         btn_clear.setOnClickListener {
-            enteredNumber = 0
+            enteredNumber = 0.0
             lastNumber = ""
             result.text = ""
         }
