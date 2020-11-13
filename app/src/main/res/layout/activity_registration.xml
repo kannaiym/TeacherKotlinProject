@@ -27,8 +27,8 @@
         android:id="@+id/confirm_password_edit_text"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Введите пароль"
-        android:layout_marginTop="8dp"/>
+        android:hint="@string/enter_password"
+        android:layout_marginTop="@dimen/margin_8_dp"/>
 
     <Button
         android:id="@+id/registration_button"

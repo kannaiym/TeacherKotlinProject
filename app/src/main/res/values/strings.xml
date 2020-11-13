@@ -7,4 +7,6 @@
     <string name="login">Авторизация</string>
     <string name="enter_password_field">Пароль введен не корректно.</string>
     <string name="password_not_same">Пароли не совпадают</string>
+    <string name="enter_password">Введите пароль</string>
+
 </resources>
